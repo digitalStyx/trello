@@ -1,6 +1,7 @@
 package pl.styx.trello.utils;
 
-import pl.styx.trello.services.TrelloService;
+import pl.styx.trello.BundleKeys;
+import retrofit.RequestInterceptor;
 import retrofit.RestAdapter;
 
 public class TrelloApi {
@@ -12,6 +13,12 @@ public class TrelloApi {
         restAdapter = new RestAdapter.Builder()
                 .setEndpoint("https://api.trello.com/1/")
                 .setLogLevel(RestAdapter.LogLevel.FULL)
+                .setRequestInterceptor(new RequestInterceptor() {
+                    @Override
+                    public void intercept(RequestFacade request) {
+                        request.addQueryParam("key", BundleKeys.TRELLO_KEY);
+                    }
+                })
                 .build();
 
         service = restAdapter.create(TrelloService.class);

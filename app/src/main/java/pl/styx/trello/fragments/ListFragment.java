@@ -20,9 +20,8 @@ import it.gmariotti.cardslib.library.internal.Card;
 import it.gmariotti.cardslib.library.internal.CardArrayAdapter;
 import it.gmariotti.cardslib.library.internal.CardHeader;
 import it.gmariotti.cardslib.library.view.CardListView;
-import pl.styx.trello.BundleKeys;
 import pl.styx.trello.R;
-import pl.styx.trello.models.TrelloCard;
+import pl.styx.trello.models.retrofit.TrelloCard;
 import pl.styx.trello.utils.TrelloApi;
 import retrofit.Callback;
 import retrofit.RetrofitError;
@@ -50,10 +49,9 @@ public class ListFragment extends Fragment {
     }
 
     public void setCards(String id) {
-        TrelloApi.getInstance().getService().cards(id, BundleKeys.TRELLO_KEY, new Callback<List<TrelloCard>>() {
+        TrelloApi.getInstance().getService().cards(id, new Callback<List<TrelloCard>>() {
             @Override
             public void success(List<TrelloCard> trelloLists, Response response) {
-                Log.v("Radek", "Karty są ok");
 
                 ArrayList<Card> cards = new ArrayList<Card>();
 
